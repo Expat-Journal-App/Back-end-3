@@ -3,7 +3,8 @@ const server = require('./api/server')
 
 dotenv.config()
 
-const PORT = process.env.PORT || 8000
+const PORT = require('./config').port
+
 server.listen(PORT, () => {
     console.log(`server live at localhost:${PORT}`)
 })
