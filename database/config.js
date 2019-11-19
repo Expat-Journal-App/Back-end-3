@@ -1,16 +1,5 @@
-require('dotenv').config();
+const knex = require('knex')
+const env = require('../config').env
+const knexConfig = require('../knexfile.js')
 
-module.exports = {
-  development: {
-    url: process.env.DEV_DATABASE_URL,
-    dialect: 'postgres',
-  },
-  test: {
-    url: process.env.TEST_DATABASE_URL,
-    dialect: 'postgres',
-  },
-  production: {
-    url: process.env.DATABASE_URL,
-    dialect: 'postgres',
-  },
-};
+module.exports = knex(knexConfig[env])

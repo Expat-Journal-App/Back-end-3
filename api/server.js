@@ -1,5 +1,5 @@
 const express = require('express')
-const routes = require('../routes')
+const JournalRouter = require('../database/helpers/journal-router')
 const cors = require('cors')
 const helmet = require('helmet')
 
@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use(helmet())
 app.use(logger)
-app.use('/api', routes)
+app.use('/api', JournalRouter)
 
 app.get('/', (req, res) => {
     res.send(`
