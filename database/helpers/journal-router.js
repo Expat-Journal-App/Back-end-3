@@ -17,6 +17,17 @@ router.get('/stories/:id', validateStoryId, (req, res) => {
     res.json(req.stories)
 })
 
+router.post('/stories', (req, res) => {
+    const newStory = req.body;
+    Stories.addStory(newStory)
+        .then(story => {
+            res.status(200).json(story)
+        })
+        .catch(() => {
+            res.status(500)
+        })
+})
+
 function validateStoryId(req, res, next) {
     const {id} = req.params
     Stories.getStoryById(id)
