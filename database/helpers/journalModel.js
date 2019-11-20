@@ -113,4 +113,5 @@ function getStoryById(storyId) {
     .select('s.id as story_id', 's.title as story_title', 's.date_trip as date_trip', 's.date_posting as date_posting', 's.story as story', 'l.city as city', 'l.country as country', 'p.photo_url as photo_url', 'p.description as photo_description')
     .orderBy('s.id')
     .where('s.id', storyId)
+    .first()
 }
