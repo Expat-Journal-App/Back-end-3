@@ -28,6 +28,22 @@ router.post('/stories', (req, res) => {
         })
 })
 
+router.put('/stories/:id', validateStoryId, (req, res, next) => {
+    Stories.updateStory(req.stories.story_id, req.body)
+        .then(story => {
+            res.status(200).json(story)
+        })
+        .catch(next)
+})
+
+router.delete('/stories/:id', [validateStoryId], (req, res, next) => {
+    Stories.deleteStory(req.stories.story_id)
+    .then(() => {
+        res.status(200).json({message: 'story has been deleted'})
+    })
+    .catch(next)
+})
+
 function validateStoryId(req, res, next) {
     const {id} = req.params
     Stories.getStoryById(id)
@@ -43,5 +59,14 @@ function validateStoryId(req, res, next) {
        res.status(500).json({message: 'Something terrible happend while checking hub id: ' + error.message,})
    })
    }
+
+router.use((error, req, res) => {
+    res.status(500).json({
+        file: 'userRouter',
+        method: 'req.method',
+        url: req.url,
+        message: error.message
+    })
+})
 
 module.exports = router;
