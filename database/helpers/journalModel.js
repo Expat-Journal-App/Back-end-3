@@ -144,6 +144,9 @@ function updateLocationsStories(story_id, location_id, t) {
     return db("locations_stories").transacting(t)
         .where({ story_id: story_id })
         .update({ location_id: location_id })
+        .then(res => {
+            console.log(res)
+        })
 }
 
 function updatePhoto(storyId, story, t) {
@@ -164,8 +167,8 @@ function updateLocation(res, story, storyId, t) {
                 updateLocationsStories(storyId, res2[0], t)
             }) 
         } else {
-            // const check = res[0].id
-            // updateLocationsStories(storyId, check)
+            const check = res[0].id
+            updateLocationsStories(storyId, check, t)
     }
 }
 
@@ -233,3 +236,18 @@ function getStoryById(storyId) {
 // }
 
 // checkLocation2(story2)
+
+// const story_id = 6
+// const location_id = 7
+
+// function updateLocationsStories2(story_id, location_id) {
+//     return db("locations_stories")
+//         .where({ story_id: story_id })
+//         .update({ location_id: location_id })
+//         .then(res => {
+//             console.log(res)
+//         })
+// }
+
+// updateLocationsStories2(story_id, location_id)
+
