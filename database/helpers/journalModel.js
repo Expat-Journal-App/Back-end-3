@@ -143,7 +143,7 @@ function addStory(story) {
 function updateLocationsStories(story_id, location_id, t) {
     return db("locations_stories").transacting(t)
         .where({ story_id: story_id })
-        .update({ location_id: location_id })
+        .update({ location_id: location_id }, 'id')
         .then(res => {
             console.log(res)
         })
@@ -153,7 +153,7 @@ function updatePhoto(storyId, story, t) {
     return db("photos").transacting(t).where('photos.story_id', storyId).update({
       photo_url: story.photo_url,
       description: story.description,
-    });
+    }, 'id');
 }
 
 function updateLocation(res, story, storyId, t) {
@@ -161,7 +161,7 @@ function updateLocation(res, story, storyId, t) {
         return db("locations").transacting(t).insert({
             city: story.city,
             country: story.country
-            })
+            }, 'id')
             .then(res2 => {
                 console.log(res2)
                 updateLocationsStories(storyId, res2[0], t)
@@ -190,7 +190,7 @@ function updateStory(id, story){
         return db('stories')
         .transacting(t)
         .where({id})
-        .update({title: story.title, date_trip: story.date_trip, date_posting: getDate(), story: story.story})
+        .update({title: story.title, date_trip: story.date_trip, date_posting: getDate(), story: story.story}, 'id')
             .then(() => {
                 const newPhoto = updatePhoto(id, story, t)
                 const newLocation = checkLocation(id, story, t)
