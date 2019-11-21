@@ -74,26 +74,26 @@ function insertPhoto(story, storyId, t) {
       photo_url: story.photo_url,
       description: story.description,
       story_id: storyId
-    });
+    }, 'id');
   }
   function insertLocation(story, t) {
     return db("locations").transacting(t).insert({
       city: story.city,
       country: story.country
-    });
+    }, 'id');
   }
   function insertLocationStory(storyId, locationId, t) {
     return db("locations_stories").transacting(t).insert({
       story_id: storyId,
       location_id: locationId
-    });
+    }, 'id');
   }
 
 function addStory(story) {
     return db.transaction(function(t) {
         return db('stories')
             .transacting(t)
-            .insert({title: story.title, date_trip: story.date_trip, date_posting: getDate(), story: story.story})
+            .insert({title: story.title, date_trip: story.date_trip, date_posting: getDate(), story: story.story}, 'id')
                 .then(storyId => {
                     const newPhoto = insertPhoto(story, storyId[0], t)
                     const newLocation = insertLocation(story, t)
@@ -223,31 +223,4 @@ function getStoryById(storyId) {
     .where('s.id', storyId)
     .first()
 }
-
-// const story2 = {city: 'Abuja'}
-
-// function checkLocation2(story2) {
-//     return db("locations")
-//     .select('locations.id')
-//     .where('locations.city', story2.city)
-//     .then(res => {
-//         console.log(res[0].id)
-//     })
-// }
-
-// checkLocation2(story2)
-
-// const story_id = 6
-// const location_id = 7
-
-// function updateLocationsStories2(story_id, location_id) {
-//     return db("locations_stories")
-//         .where({ story_id: story_id })
-//         .update({ location_id: location_id })
-//         .then(res => {
-//             console.log(res)
-//         })
-// }
-
-// updateLocationsStories2(story_id, location_id)
 
