@@ -1,16 +1,16 @@
 {
   "name": "alex",
   "version": "1.0.0",
-  "description": "\"boilerplate for express apps\"",
+  "description": "boilerplate for express apps",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "migrate": "knex migrate:latest",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env DB_ENV=testing jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Expat-Journal-App/Back-end-Alex.git"
+    "url": "https://github.com/Expat-Journal-App/Back-end-Alex/issues"
   },
   "author": "Alexander Oguejiofor <oguejioforalexander@gmail.com>",
   "license": "ISC",
@@ -28,6 +28,9 @@
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0"
+    "cross-env": "^6.0.3",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
   }
 }

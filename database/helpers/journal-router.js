@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/stories', (req, res) => {
     Stories.getStories()
         .then(stories => {
-            res.json(stories)
+            res.status(200).json(stories)
         })
         .catch(err => {
             res.status(500).json({message: 'Failed to get stories' + err.message})

@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV || 'development'
+const env = process.env.DB_ENV || 'development'
 const isProduction = env === 'production'
 const port = process.env.PORT || 8000
 
@@ -14,5 +14,5 @@ module.exports = {
     'https://cookies.ladrillo.now.sh',
     'http://localhost:3000',
   ],
-  secure: isProduction, // cookie sent over http only in dev
+  secure: isProduction, // cookie sent over http only in de
 }

@@ -8,7 +8,7 @@ module.exports = {
     updateStory
 }
 
-// select l.id as story_id,
+// select l.id as story_id
 // s.title as story_title,
 // s.date_trip as date_trip,
 // s.date_posting as date_posting,
